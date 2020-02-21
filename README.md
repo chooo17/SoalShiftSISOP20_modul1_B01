@@ -174,3 +174,4 @@ awk  '{print $0}' /home/sin/sisop/Modul1/SoalShift/cat/Location.log >> /home/sin
 		mv /home/sin/sisop/Modul1/SoalShift/cat/pdkt_kusuma_"$(($p+1))".jpeg /home/sin/sisop/Modul1/SoalShift/cat/duplicate/duplicate_"$count".jpeg
 	fi
 loop untuk mengecek apakah ada gambar yang sama yang sudah terdownload, apabila sudah ada gambar yang dimaksud maka gambar yang sedang dicek akan dipindahkan ke direktori `/duplicate` jika tidak maka akan dipindahkan ke direktori `/kenangan`.
++ `5 6-23/8 * * 0-5 bash /home/sin/sisop/Modul1/SoalShift/cat/soal3.sh` cron job untuk menjalankan `soal3.sh` secara otomatis, yaitu setiap 8 jam pada hari Minggu - Jumat dimulai pada jam 06.05.
