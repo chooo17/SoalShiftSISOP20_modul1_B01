@@ -1,0 +1,30 @@
+2a. membuat script bash untuk menghasilkan password acak dengan huruf kecil, besar, dan angka.
+2b. menamai file dengan argumen yang seseuai.
+scripnya sebagai berikut:
+#!/bin/bash
+
+fileOut="$1.txt"
+//agar nama filenya sesuai dengan argumen;
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 28 | head -n 1 >>$fileOut
+//menggunakan urandom untuk menggenerate password secara acak;
+
+2c. mengenkripsi file password (2b) dengan metode caesar cheaper
+  #!/bin/bash                                                                                                            
+name=$1
+enk=${name%%.*}
+shift=$(ls -l $nama | cut -d ' ' -f '8' | head -c 2)
+upperAlphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
+lowAlphabet=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+enkname=$(echo $enk | tr "${upperAlphabet:0:26}" "${upperAlphabet:${shift}:26}" | tr "${lowAlphabet:0:26}" "${lowA>
+mv $name $enkname.txt
+
+2d. mendeskripsi file dari 2c sehingga nama yang sudah dienkripsi bisa kembali menjadi nama semula.
+
+#!/bin/bash
+upperAlphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ
+lowAlphabet=abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+name=$1
+enk=${name%%.*}
+shift=$(ls -l $nama | cut -d ' ' -f '8' | head -c 2)
+enkname=$(echo $phrase | tr "${upperAlphabet:${shift}:26}" "${upperAlphabet:0:26}" | tr "${lowAlphabet:${shift}:26}" >
+mv $name $enkname.txt
