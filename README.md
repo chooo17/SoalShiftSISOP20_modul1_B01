@@ -116,7 +116,7 @@ do
 	flag=$((0))
 	for ((j=0; j<$p; j=j+1))
 		do
-		if [ $i -eq 0 ]
+		if [ $p -eq 0 ]
 			then mv /home/sin/sisop/Modul1/SoalShift/cat/pdkt_kusuma_1.jpeg /home/sin/sisop/Modul1/SoalShift/cat/kenangan/kenangan_"$count1".jpeg
 
 		elif [ "${loc[$p]}" == "${loc[$j]}" ]
@@ -154,7 +154,7 @@ awk  '{print $0}' /home/sin/sisop/Modul1/SoalShift/cat/Location.log >> /home/sin
 + ``` sh
 	for ((j=0; j<$p; j=j+1))
 		do
-		if [ $i -eq 0 ]
+		if [ $p -eq 0 ]
 			then mv /home/sin/sisop/Modul1/SoalShift/cat/pdkt_kusuma_1.jpeg /home/sin/sisop/Modul1/SoalShift/cat/kenangan/kenangan_"$count1".jpeg
 
 		elif [ "${loc[$p]}" == "${loc[$j]}" ]
