@@ -1,3 +1,4 @@
+
 # SoalShiftSISOP20_modul1_B01
 
 Soal Shift Modul 1
@@ -96,7 +97,7 @@ printf "Sepuluh Produk dengan Profit terkecil berdasarkan hasil poin A ada di 1C
 ### 3. Soal 3
 ##### 1 tahun telah berlalu sejak pencampakan hati Kusuma. Akankah sang pujaan hati kembali ke naungan Kusuma? Memang tiada maaf bagi Elen. Tapi apa daya hati yang sudah hancur, Kusuma masih terguncang akan sikap Elen. Melihat kesedihan Kusuma, kalian mencoba menghibur Kusuma dengan mengirimkan gambar kucing. `[a] Maka dari itu, kalian mencoba membuat script untuk mendownload 28 gambar dari "https://loremflickr.com/320/240/cat" menggunakan command wget dan menyimpan file dengan nama "pdkt_kusuma_NO" (contoh: pdkt_kusuma_1, pdkt_kusuma_2, pdkt_kusuma_3) serta jangan lupa untuk menyimpan log messages wget kedalam sebuah file "wget.log"`. Karena kalian gak suka ribet, kalian membuat penjadwalan untuk menjalankan script download gambar tersebut. Namun, script download tersebut hanya berjalan`[b] setiap 8 jam dimulai dari jam 6.05 setiap hari kecuali hari Sabtu` Karena gambar yang didownload dari link tersebut bersifat random, maka ada kemungkinan gambar yang terdownload itu identik. Supaya gambar yang identik tidak dikira Kusuma sebagai spam, maka diperlukan sebuah script untuk memindahkan salah satu gambar identik. Setelah memilah gambar yang identik, maka dihasilkan gambar yang berbeda antara satu dengan yang lain. Gambar yang berbeda tersebut, akan kalian kirim ke Kusuma supaya hatinya kembali ceria. Setelah semua gambar telah dikirim, kalian akan selalu menghibur Kusuma, jadi gambar yang telah terkirim tadi akan kalian simpan kedalam folder /kenangan dan kalian bisa mendownload gambar baru lagi. `[c] Maka dari itu buatlah sebuah script untuk mengidentifikasi gambar yang identik dari keseluruhan gambar yang terdownload tadi. Bila terindikasi sebagai gambar yang identik, maka sisakan 1 gambar dan pindahkan sisa file identik tersebut ke dalam folder ./duplicate dengan format filename "duplicate_nomor" (contoh : duplicate_200, duplicate_201). Setelah itu lakukan pemindahan semua gambar yang tersisa kedalam folder ./kenangan dengan format filename "kenangan_nomor" (contoh: kenangan_252, kenangan_253). Setelah tidak ada gambar di current directory, maka lakukan backup seluruh log menjadi ekstensi ".log.bak"`. Hint : Gunakan wget.log untuk membuat location.log yang isinya merupakan hasil dari grep "Location". *Gunakan Bash, Awk dan Crontab
 
-Bash script *soal3.sh* :
+Bash script *soal3a.sh* :
 
 ```sh
 for i in {1..28}
@@ -105,6 +106,14 @@ do
     awk  '{print $0}' /home/sin/sisop/Modul1/SoalShift/cat/wget1.log >> /home/sin/sisop/Modul1/SoalShift/cat/wget.log
     grep "Location"  /home/sin/sisop/Modul1/SoalShift/cat/wget1.log >> /home/sin/sisop/Modul1/SoalShift/cat/Location.log
 done
+```
+Crontab *soal3b.txt* :
+```sh
+5 6-23/8 * * 0-5 bash /home/sin/sisop/Modul1/SoalShift/cat/soal3a.sh
+```
+Bash script *soal3c.sh* :
+```sh
+#!/bin/bash
 
 readarray -t loc < /home/sin/sisop/Modul1/SoalShift/cat/Location.log
 for p in {0..27}
@@ -174,4 +183,4 @@ awk  '{print $0}' /home/sin/sisop/Modul1/SoalShift/cat/Location.log >> /home/sin
 		mv /home/sin/sisop/Modul1/SoalShift/cat/pdkt_kusuma_"$(($p+1))".jpeg /home/sin/sisop/Modul1/SoalShift/cat/duplicate/duplicate_"$count".jpeg
 	fi
 loop untuk mengecek apakah ada gambar yang sama yang sudah terdownload, apabila sudah ada gambar yang dimaksud maka gambar yang sedang dicek akan dipindahkan ke direktori `/duplicate` jika tidak maka akan dipindahkan ke direktori `/kenangan`.
-+ `5 6-23/8 * * 0-5 bash /home/sin/sisop/Modul1/SoalShift/cat/soal3.sh` cron job untuk menjalankan `soal3.sh` secara otomatis, yaitu setiap 8 jam pada hari Minggu - Jumat dimulai pada jam 06.05.
++ `5 6-23/8 * * 0-5 bash /home/sin/sisop/Modul1/SoalShift/cat/soal3a.sh` cron job untuk menjalankan `soal3a.sh` secara otomatis, yaitu setiap 8 jam pada hari Minggu - Jumat dimulai pada jam 06.05.
